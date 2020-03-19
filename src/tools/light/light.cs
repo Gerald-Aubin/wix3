@@ -30,6 +30,7 @@ namespace Microsoft.Tools.WindowsInstallerXml.Tools
         private WixBinder binder;
         private string binderClass;
         private bool dropUnrealTables;
+        private bool fipsCompliant;
         private StringCollection inputFiles;
         private StringCollection invalidArgs;
         private StringCollection unparsedArgs;
@@ -62,6 +63,7 @@ namespace Microsoft.Tools.WindowsInstallerXml.Tools
         {
             this.bindPaths = new StringCollection();
             this.extensionList = new StringCollection();
+            this.fipsCompliant = false;
             this.localizationFiles = new StringCollection();
             this.messageHandler = new ConsoleMessageHandler("LGHT", "light.exe");
             this.inputFiles = new StringCollection();
@@ -450,6 +452,11 @@ namespace Microsoft.Tools.WindowsInstallerXml.Tools
                         this.outputFile = Path.ChangeExtension(this.outputFile, outputExtension);
                     }
 
+                    // If light is supposed to be FIPS compliant and is using the default binder,
+                    // modify the binder's properties to generate a FIPS-compliant GUID
+                    if (this.fipsCompliant && this.binder.GetType().FullName.Equals("Microsoft.Tools.WindowsInstallerXml.Binder", StringComparison.Ordinal))
+                        ((Microsoft.Tools.WindowsInstallerXml.Binder)this.binder).BackwardsCompatibleGuidGen = false;
+
                     this.binder.Bind(output, this.outputFile);
                 }
             }
@@ -587,6 +594,10 @@ namespace Microsoft.Tools.WindowsInstallerXml.Tools
                         }
 
                         this.extensionList.Add(args[i]);
+                    }
+                    else if(parameter.Equals("fips", StringComparison.Ordinal))
+                    {
+                        this.fipsCompliant = true;
                     }
                     else if (parameter.Equals("loc", StringComparison.Ordinal))
                     {

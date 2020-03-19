@@ -36,6 +36,7 @@ namespace Microsoft.Tools.WindowsInstallerXml.Build.Tasks
         private string customBinder;
         private string defaultCompressionLevel;
         private ITaskItem[] extensions;
+        private bool fipsCompliant;
         private string[] ices;
         private bool leaveTemporaryFiles;
         private ITaskItem[] localizationFiles;
@@ -198,6 +199,12 @@ namespace Microsoft.Tools.WindowsInstallerXml.Build.Tasks
         {
             get { return this.extensions; }
             set { this.extensions = value; }
+        }
+
+        public bool FipsCompliant
+        {
+            get { return this.fipsCompliant; }
+            set { this.fipsCompliant = value; }
         }
 
         public string[] Ices
@@ -475,6 +482,7 @@ namespace Microsoft.Tools.WindowsInstallerXml.Build.Tasks
             commandLineBuilder.AppendIfTrue("-dut", this.DropUnrealTables);
             commandLineBuilder.AppendIfTrue("-eav", this.ExactAssemblyVersions);
             commandLineBuilder.AppendExtensions(this.Extensions, this.ExtensionDirectory, this.referencePaths);
+            commandLineBuilder.AppendIfTrue("-fips", this.FipsCompliant);
             commandLineBuilder.AppendIfTrue("-fv", this.SetMsiAssemblyNameFileVersion);
             commandLineBuilder.AppendArrayIfNotNull("-ice:", this.Ices);
             commandLineBuilder.AppendArrayIfNotNull("-loc ", this.LocalizationFiles);
