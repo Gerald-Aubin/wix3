@@ -2459,6 +2459,7 @@
       ExactAssemblyVersions="$(ExactAssemblyVersions)"
       ExtensionDirectory="$(WixExtDir)"
       Extensions="@(_ResolvedWixExtensionPaths)"
+      FipsCompliant="$(FipsCompliant)"
       Ices="$(Ices)"
       LeaveTemporaryFiles="$(LeaveTemporaryFiles)"
       LocalizationFiles="@(EmbeddedResource)"

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CommandLineArguments" xml:space="preserve">
     <value>   -ai        allow identical rows, identical rows will be treated as a warning (deprecated)
@@ -135,6 +135,7 @@
    -d&lt;name&gt;[=&lt;value&gt;]  define a wix variable, with or without a value.
    -dut       drop unreal tables from the output image (deprecated)
    -ext &lt;extension&gt;  extension assembly or "class, assembly"
+   -fips    enables FIPS compliant algorithms
    -loc &lt;loc.wxl&gt;  read localization strings from .wxl file
    -nologo    skip printing light logo information
    -notidy    do not delete temporary files (useful for debugging)
